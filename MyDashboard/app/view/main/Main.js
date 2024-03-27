@@ -91,7 +91,7 @@ Ext.define("MyDashboard.view.main.Main", {
       // The following grid shares a store with the classic version's grid as well!
       items: [
         {
-          xtype: "requestgridview",
+          xtype: "toppanel",
         },
       ],
     },
@@ -103,11 +103,13 @@ Ext.define("MyDashboard.view.main.Main", {
       },
     },
     {
-      title: "Groups",
+      title: "Logs",
       iconCls: "fa-users",
-      bind: {
-        html: "{loremIpsum}",
-      },
+      items: [
+        {
+          xtype: "loggrid",
+        },
+      ],
     },
     {
       title: "Settings",

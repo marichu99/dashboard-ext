@@ -10,6 +10,17 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
   viewModel: {
     type: "requestsviewmodel",
   },
+  height: 600,
+  plugins: {
+    rowediting: {
+      clicksToEdit: 1,
+    },
+  },
+  selModel: {
+    selType: "checkboxmodel",
+    mode: "MULTI",
+  },
+
   tbar: {
     overflowHandler: "menu",
     items: [
@@ -30,6 +41,14 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
         text: "Filter",
         listeners: {
           click: "onFilterClick",
+        },
+      },
+      "->",
+      {
+        text: "Show Logs",
+        handler: "onShowLogs",
+        bind: {
+          disabled: "{!requestgridview.selection}",
         },
       },
     ],
@@ -55,5 +74,11 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
   },
   viewConfig: {
     scrollable: true,
+  },
+  listeners: {
+    cellclick: "onLogGridCellClick",
+    celldblclick: "onLogGridCellDblClick",
+    cellcontextmenu: "onLogGridCellContextMenu",
+    selectLog: "onSelectLog",
   },
 });

@@ -13,7 +13,8 @@ Ext.define('MyDashboard.view.requests.RequestsViewModel', {
     },
     formulas: {
         filteredRequests: function (get) {
-            const requestsStore = Ext.ComponentQuery.query('requestgridview')[0].getStore();            var requests = get('requests.data.items'),
+            const requestsStore = Ext.ComponentQuery.query('requestgridview')[0].getStore();            
+            var requests = get('requests.data.items'),
                 startDate = get('startDate'),
                 endDate = get('endDate');
         
