@@ -2,7 +2,7 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
   extend: "Ext.grid.Panel",
   xtype: "requestgridview",
   title: "Requests",
-  controller:"requestviewcontroller",
+  controller: "requestviewcontroller",
 
   store: {
     type: "requests",
@@ -28,7 +28,9 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
       {
         xtype: "button",
         text: "Filter",
-        handler: "onFilterClick",
+        listeners: {
+          click: "onFilterClick",
+        },
       },
     ],
   },
@@ -52,6 +54,6 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
     displayInfo: true,
   },
   viewConfig: {
-      scrollable: true,
-    },
+    scrollable: true,
+  },
 });

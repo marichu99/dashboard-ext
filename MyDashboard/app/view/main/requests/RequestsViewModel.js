@@ -12,22 +12,8 @@ Ext.define('MyDashboard.view.requests.RequestsViewModel', {
         endDate: null
     },
     formulas: {
-        // filteredRequests: function (get) {
-        //     var requests = get('requests.data'),
-        //         startDate = get('startDate'),
-        //         endDate = get('endDate');
-    
-        //     if (!startDate || !endDate) {
-        //         return requests;
-        //     }
-    
-        //     return Ext.Array.filter(requests, function (request) {
-        //         var date = new Date(request.date);
-        //         return date >= startDate && date <= endDate;
-        //     });
-        // }
         filteredRequests: function (get) {
-            var requests = get('requests.data.items'),
+            const requestsStore = Ext.ComponentQuery.query('requestgridview')[0].getStore();            var requests = get('requests.data.items'),
                 startDate = get('startDate'),
                 endDate = get('endDate');
         
@@ -40,12 +26,19 @@ Ext.define('MyDashboard.view.requests.RequestsViewModel', {
                 console.error('Invalid requests data or missing startDate/endDate'); // Log an error if requests is not an array or startDate/endDate is missing
                 return requests; // Return requests as is
             }
-        
-            return requests.filter((index),function (request) { // Use filter directly on requests
-                var date = new Date(request[i].data.date);
+
+            requestsStore.filterBy(function(record) {
+                const date = new Date(record.get('date'));
                 return date >= startDate && date <= endDate;
             });
+        
+            // return requests.filter(constructor => {
+            //     const date = new Date(constructor.data.date);
+            //     console.log(date >= startDate && date <= endDate)
+            //     return date >= startDate && date <= endDate;
+            // });
         }
+        
         
     }
 });
