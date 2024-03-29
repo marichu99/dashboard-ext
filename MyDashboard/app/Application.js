@@ -23,5 +23,31 @@ Ext.define('MyDashboard.Application', {
                 }
             }
         );
-    }
+    },
+    // launch:function(profile){
+    //     var loggedIn;
+    //     loggedIn = localStorage.getItem("MsAppLoggedIn");
+    //     console.log(loggedIn);
+    //     // Ext.widget(loggedIn ? 'app-main' : 'login');
+    //     /*Ext.create({
+    //       xtype: loggedIn ? 'app-main' : 'login'
+    //     })*/
+    //      Ext.widget(loggedIn ? 'app-main' : 'login');
+    //   },
+
+       defaultToken: 'request',
+        listen: {
+          global: {
+            unmatchedroute: 'onUnmatchedRoute'
+          }
+        },
+
+        onUnmatchedRoute: function (token) {
+          Ext.Msg.show({
+            title: 'Failure',
+            msg: 'Unknown path: /' + token,
+            buttons: Ext.Msg.OK,
+            icon: Ext.Msg.ERROR
+          });
+          }
 });

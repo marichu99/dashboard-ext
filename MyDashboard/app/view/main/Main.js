@@ -112,6 +112,15 @@ Ext.define("MyDashboard.view.main.Main", {
       ],
     },
     {
+      title: "Login",
+      iconCls: "fa-users",
+      items: [
+        {
+          xtype: "loginview",
+        },
+      ],
+    },
+    {
       title: "Settings",
       iconCls: "fa-cog",
       bind: {

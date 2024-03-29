@@ -80,5 +80,6 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
     celldblclick: "onLogGridCellDblClick",
     cellcontextmenu: "onLogGridCellContextMenu",
     selectLog: "onSelectLog",
+    selectrequest:'onSelectRequest'
   },
 });
