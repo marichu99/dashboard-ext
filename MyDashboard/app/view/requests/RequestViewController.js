@@ -73,6 +73,15 @@ Ext.define("MyDashboard.view.requests.RequestViewController", {
     vm.set("record", record);
     grid.getSelectionModel().select(record);
   },
+  onSelectRequest: function (id) {
+    let me = this,
+        grid = me.getView(),
+        vm = me.getViewModel(),
+        refs = me.getReferences();
+    let record = grid.getStore().findRecord('_id', id)
+    vm.set("record", record)
+    grid.getSelectionModel().select(record)
+},
   onLogGridCellClick: function (
     grid,
     td,
