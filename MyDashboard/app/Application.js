@@ -35,7 +35,7 @@ Ext.define('MyDashboard.Application', {
     //      Ext.widget(loggedIn ? 'app-main' : 'login');
     //   },
 
-       defaultToken: 'request',
+        defaultToken: 'home',
         listen: {
           global: {
             unmatchedroute: 'onUnmatchedRoute'
@@ -49,5 +49,5 @@ Ext.define('MyDashboard.Application', {
             buttons: Ext.Msg.OK,
             icon: Ext.Msg.ERROR
           });
-          }
+          } 
 });

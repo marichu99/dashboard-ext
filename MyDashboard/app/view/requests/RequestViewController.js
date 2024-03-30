@@ -73,7 +73,7 @@ Ext.define("MyDashboard.view.requests.RequestViewController", {
     vm.set("record", record);
     grid.getSelectionModel().select(record);
   },
-  onSelectRequest: function (id) {
+  onSelectTopPanel: function (id) {
     let me = this,
         grid = me.getView(),
         vm = me.getViewModel(),
