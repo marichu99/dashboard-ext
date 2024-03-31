@@ -120,6 +120,20 @@ Ext.define("MyDashboard.view.main.Main", {
         },
       ],
     },
+
+
+      {
+        title:"Email",
+        iconCls: "fa-users",
+        items: [
+          {
+              xtype: 'messages-MessageGrid', // Keep it as is
+              region: 'center' // Keep it as is
+          }
+      ]
+      },
+  
+  
     {
       title: "Settings",
       iconCls: "fa-cog",

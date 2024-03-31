@@ -8,25 +8,26 @@ Ext.define('MyDashboard.view.main.MainController', {
     alias: 'controller.main',
 
     routes:{
-        'request':'onRequestRoute',
-        'toppanel|loggrid': {
+        'home':'onHomeRoute',
+        
+        'toppanel|loggrid|loginview': {
             action: 'onRoute',
             before: 'onBeforeRoute'
         },
-        'requests/:id': {
-            action: 'onRequestSelect',
-            before: 'onBeforeRequestSelect',
+        'toppanel/:id': {
+            action: 'onTopPanelSelect',
+            before: 'onBeforeTopPanelSelect',
             conditions: {
                 ':id': '([0-9]+)'
             }
         },
     },
 
-    onRequestSelect:function(id){
+    onTopPanelSelect:function(id){
         //fire an event to select the record on the user grid
         this.getUserGrid().fireEvent('selectuser',id)
     },
-    onBeforeRequestSelect: function (id, action){
+    onBeforeTopPanelSelect: function (id, action){
         var me = this,
             hash = 'users',
             mainMenu = me.getMainMenu();
@@ -49,21 +50,26 @@ Ext.define('MyDashboard.view.main.MainController', {
 
     }
 ,
-    onRequestRoute:function(){
+    onHomeRoute:function(){
         let mainPanel = this.getMainPanel();
         if(mainPanel){
             mainPanel.setActiveTab(0)
         }
-    },
-
-    getRequestGrid: function () {
-        return Ext.ComponentQuery.query('usergrid')[0];
     },
     onRoute: function () {
         var me = this,
             hash = Ext.util.History.getToken(),
             mainMenu = me.getMainMenu();
         me.locateMenuItem(mainMenu, hash);
+},
+getMainList: function () {
+    return Ext.ComponentQuery.query('mainlist')[0];
+},
+getTopPanelGrid: function () {
+    return Ext.ComponentQuery.query('toppanel')[0];
+},
+getMainMenu: function () {
+    return Ext.ComponentQuery.query('mainmenu')[0];
 },
 onBeforeRoute: function (action) {
     var hash = Ext.util.History.getToken();
@@ -91,9 +97,41 @@ onBeforeRoute: function (action) {
         this.openTab(record)
         mainMenu.getSelectionModel().select(record)
     },
+    onTabChange: function(tabPanel, newTab, oldTab) {
+        var className = newTab.className;
+        Ext.util.History.add(className);
+
+    },
+    openTab: function (record) {
+        if (record) {
+            let mainlist = this.getMainList();
+            let activeTab = mainlist.items.findBy((tabItem) => tabItem.title === record.get('text'));
+            if (!activeTab && record.get('leaf')) {
+                //create new tab using details from the record
+                activeTab = mainlist.add({
+                    closable: true,
+                    xtype: record.get('className'),
+                    title: record.get('text'),
+                    iconCls: record.get('iconCls'),
+                    className: record.get('className')
+                })
+            }
+            mainlist.setActiveTab(activeTab)
+        }
+    },
 
         onItemSelected: function (sender, record) {
             Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
+        },
+
+        init: function() {
+            this.listen({
+                component: {
+                    'mainlist': {
+                        tabchange: 'onTabChange' // Listen to the tabchange event of mainlist(home)
+                    }
+                }
+            });
         },
 
         onConfirm: function (choice) {
@@ -101,4 +139,6 @@ onBeforeRoute: function (action) {
                 //
             }
         }
+
+        
     });
