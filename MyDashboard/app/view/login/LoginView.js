@@ -1,11 +1,15 @@
 Ext.define('MyDashboard.view.login.LoginView', {
-    extend: 'Ext.form.Panel',
+    extend: "Ext.window.Window",
     xtype: 'loginview',
-    title: 'Login Page',
-    controller: 'login', 
-    width: 400,
-    bodyPadding: 20,
-    layout: 'center', // Center the form on the page
+    requires: ["MyDashboard.view.login.LoginController", "Ext.form.Panel"],
+    controller: 'login',
+    bodyPadding: 10,
+    title: 'Login Window',
+    closable: false,
+    autoShow: true,
+    draggable: false,
+    resizable: false,
+    layout: 'fit',
     items: {
         xtype: 'form', // Corrected xtype to 'form'
         reference: 'form', // Added reference for easier access in the controller

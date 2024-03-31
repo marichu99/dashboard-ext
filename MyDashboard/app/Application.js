@@ -26,15 +26,13 @@ Ext.define("MyDashboard.Application", {
       }
     );
   },
-  launch: function (profile) {
-    var navView = Ext.create("Ext.NavigationView", {
-      items: [
-        {
-          xtype: "loginview",
-        },
-      ],
-    });
-    Ext.Viewport.setActiveItem(navView);
+  launch: function () {
+    var loggedIn;
+    loggedIn = localStorage.getItem("miniShopLogin");
+    console.log("Logged in: " + loggedIn);
+
+    Ext.widget("loginview");
+    
   },
 
   //  defaultToken: 'request',
