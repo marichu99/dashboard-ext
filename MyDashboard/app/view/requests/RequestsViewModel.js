@@ -18,11 +18,6 @@ Ext.define('MyDashboard.view.requests.RequestsViewModel', {
                 startDate = get('startDate'),
                 endDate = get('endDate');
         
-            console.log('Requests:', requests); // Log requests variable
-            console.log(typeof(requests.items));  // Returns "object"
-            console.log('StartDate:', startDate); // Log startDate variable
-            console.log('EndDate:', endDate); // Log endDate variable
-        
             if (!Array.isArray(requests) || !startDate || !endDate) {
                 console.error('Invalid requests data or missing startDate/endDate'); // Log an error if requests is not an array or startDate/endDate is missing
                 return requests; // Return requests as is
