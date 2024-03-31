@@ -20,12 +20,6 @@ Ext.define('MyDashboard.view.login.LoginView', {
             allowBlank: false
         }, {
             xtype: 'textfield',
-            fieldLabel: 'Email',
-            name: 'email',
-            allowBlank: false,
-            vtype: 'email'
-        }, {
-            xtype: 'textfield',
             fieldLabel: 'Password',
             name: 'password',
             inputType: 'password',

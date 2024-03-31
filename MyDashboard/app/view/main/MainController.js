@@ -2,11 +2,12 @@
  * This class is the controller for the main view for the application. It is specified as
  * the "controller" of the Main view class.
  */
-Ext.define('MyDashboard.view.main.MainController', {
-    extend: 'Ext.app.ViewController',
+Ext.define("MyDashboard.view.main.MainController", {
+  extend: "Ext.app.ViewController",
 
-    alias: 'controller.main',
+  alias: "controller.main",
 
+<<<<<<< HEAD
     routes:{
         'home':'onHomeRoute',
         
@@ -46,9 +47,45 @@ Ext.define('MyDashboard.view.main.MainController', {
         }else{
             action.stop()
         }
+=======
+//   routes: {
+//     request: "onRequestRoute",
+//     "toppanel|loggrid": {
+//       action: "onRoute",
+//     },
+//     "requests/:id": {
+//       action: "onRequestSelect",
+//       before: "onBeforeRequestSelect",
+//       conditions: {
+//         ":id": "([0-9]+)",
+//       },
+//     },
+//   },
 
+  onRequestSelect: function (id) {
+    //fire an event to select the record on the user grid
+    this.getUserGrid().fireEvent("selectuser", id);
+  },
+  onBeforeRequestSelect: function (id, action) {
+    var me = this,
+      hash = "users",
+      mainMenu = me.getMainMenu();
+    me.locateMenuItem(mainMenu, hash);
+>>>>>>> 592afba... add ajax request to the login and signup views
 
+    //get reference to grid
+    let grid = this.getUserGrid();
+
+    //get store
+    let store = grid.getStore();
+    //find record with the id
+    let record = store.findRecord("_id", id);
+    if (record) {
+      action.resume();
+    } else {
+      action.stop();
     }
+<<<<<<< HEAD
 ,
     onHomeRoute:function(){
         let mainPanel = this.getMainPanel();
@@ -119,11 +156,38 @@ onBeforeRoute: function (action) {
             mainlist.setActiveTab(activeTab)
         }
     },
+=======
+  },
+  onRequestRoute: function () {
+    let mainPanel = Ext.Component.query("requestgridview")[0]
+    if (mainPanel) {
+      mainPanel.setActiveTab(0);
+    }
+  },
 
-        onItemSelected: function (sender, record) {
-            Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
-        },
+  getRequestGrid: function () {
+    return Ext.Component.query("requestgridview")[0];
+  },
+  onRoute: function () {
+    var me = this,
+      hash = Ext.util.History.getToken(),
+      mainMenu = me.getMainMenu();
+    me.locateMenuItem(mainMenu, hash);
+  },
+  
+  locateMenuItem: function (mainMenu, className) {
+    let rootNode = mainMenu.getRootNode();
+    let record = rootNode.findChild("className", className, true);
+    this.openTab(record);
+    mainMenu.getSelectionModel().select(record);
+  },
+>>>>>>> 592afba... add ajax request to the login and signup views
 
+  onItemSelected: function (sender, record) {
+    Ext.Msg.confirm("Confirm", "Are you sure?", "onConfirm", this);
+  },
+
+<<<<<<< HEAD
         init: function() {
             this.listen({
                 component: {
@@ -142,3 +206,11 @@ onBeforeRoute: function (action) {
 
         
     });
+=======
+  onConfirm: function (choice) {
+    if (choice === "yes") {
+      //
+    }
+  },
+});
+>>>>>>> 592afba... add ajax request to the login and signup views

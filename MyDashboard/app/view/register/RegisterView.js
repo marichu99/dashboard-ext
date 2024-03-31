@@ -5,6 +5,7 @@ Ext.define('MyDashboard.view.register.RegisterView', {
     width: 400,
     height: 350, // Increased height to accommodate the confirm password field
     layout: 'fit',
+    controller:"register",
     items: [{
         xtype: 'form', // Form added around the items
         reference: 'registrationForm',
@@ -33,6 +34,7 @@ Ext.define('MyDashboard.view.register.RegisterView', {
             name: 'confirmPassword',
             inputType: 'password',
             allowBlank: false,
+            submitValue: false,
             validator: function(value) {
                 var password = this.up('form').down('#passwordField').getValue();
                 if (value !== password) {
