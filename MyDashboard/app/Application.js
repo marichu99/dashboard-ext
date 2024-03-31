@@ -15,13 +15,6 @@ Ext.define("MyDashboard.Application", {
     },
   },
 
-<<<<<<< HEAD
-        defaultToken: 'home',
-        listen: {
-          global: {
-            unmatchedroute: 'onUnmatchedRoute'
-          }
-=======
   onAppUpdate: function () {
     Ext.Msg.confirm(
       "Application Update",
@@ -38,7 +31,6 @@ Ext.define("MyDashboard.Application", {
       items: [
         {
           xtype: "loginview",
->>>>>>> 592afba... add ajax request to the login and signup views
         },
       ],
     });
@@ -52,16 +44,6 @@ Ext.define("MyDashboard.Application", {
   //     }
   //   },
 
-<<<<<<< HEAD
-        onUnmatchedRoute: function (token) {
-          Ext.Msg.show({
-            title: 'Failure',
-            msg: 'Unknown path: /' + token,
-            buttons: Ext.Msg.OK,
-            icon: Ext.Msg.ERROR
-          });
-          } 
-=======
   //   onUnmatchedRoute: function (token) {
   //     Ext.Msg.show({
   //       title: 'Failure',
@@ -70,5 +52,4 @@ Ext.define("MyDashboard.Application", {
   //       icon: Ext.Msg.ERROR
   //     });
   //     }
->>>>>>> 592afba... add ajax request to the login and signup views
 });
