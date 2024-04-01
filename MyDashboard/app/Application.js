@@ -26,14 +26,14 @@ Ext.define("MyDashboard.Application", {
       }
     );
   },
-  launch: function () {
-    var loggedIn;
-    loggedIn = localStorage.getItem("miniShopLogin");
-    console.log("Logged in: " + loggedIn);
+  // launch: function () {
+  //   var loggedIn;
+  //   loggedIn = localStorage.getItem("miniShopLogin");
+  //   console.log("Logged in: " + loggedIn);
 
-    Ext.widget("loginview");
+  //   Ext.widget("loginview");
     
-  },
+  // },
 
   //  defaultToken: 'request',
   //   listen: {

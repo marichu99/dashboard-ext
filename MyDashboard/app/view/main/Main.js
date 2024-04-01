@@ -120,6 +120,15 @@ Ext.define("MyDashboard.view.main.Main", {
         },
       ],
     },
+    {
+      title: " Products",
+      iconCls: "fa-users",
+      items: [
+        {
+          xtype: "productsgridview",
+        },
+      ],
+    },
 
 
       // {
