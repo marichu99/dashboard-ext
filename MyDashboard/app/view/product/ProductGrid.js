@@ -12,13 +12,13 @@ Ext.define("MyDashboard.view.product.ProductGrid", {
   //   },
   height: 600,
   plugins: {
-    rowediting: {
-      clicksToEdit: 1,
+    cellediting: {
+      clicksToEdit: 2,
     },
   },
   selModel: {
     selType: "checkboxmodel",
-    mode: "MULTI",
+    mode: "SINGLE",
   },
 
   tbar: {
@@ -42,6 +42,15 @@ Ext.define("MyDashboard.view.product.ProductGrid", {
     { text: "Product Price", dataIndex: "price", flex: 1 },
     { text: "Product Category", dataIndex: "category", flex: 1 },
     { text: "Product Quantity", dataIndex: "quantity", flex: 1 },
+    {
+      text: "Actions",
+      xtype: 'widgetcolumn',
+      widget: {
+        xtype: 'button',
+        text: 'Show Details',
+        handler: 'onShowProductDetails'
+      }
+    }
   ],
   bbar: {
     xtype: "pagingtoolbar",
