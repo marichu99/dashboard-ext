@@ -6,6 +6,7 @@
 Ext.define("MyDashboard.Application", {
   extend: "Ext.app.Application",
 
+  requires: ["MyDashboard.view.login.LoginView", "MyDashboard.view.main.Main"],
   name: "MyDashboard",
 
   quickTips: false,
@@ -26,14 +27,14 @@ Ext.define("MyDashboard.Application", {
       }
     );
   },
-  // launch: function () {
-  //   var loggedIn;
-  //   loggedIn = localStorage.getItem("miniShopLogin");
-  //   console.log("Logged in: " + loggedIn);
-
-  //   Ext.widget("loginview");
+  launch: function () {
     
-  // },
+    var loggedIn;
+    loggedIn = localStorage.getItem("appLoggedIn");
+    console.log("The logged in value is ", loggedIn);
+
+    Ext.widget(loggedIn ? "app-main" : "loginview");
+  },
 
   //  defaultToken: 'request',
   //   listen: {
