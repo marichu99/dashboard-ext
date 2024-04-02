@@ -6,149 +6,42 @@
  * TODO - Replace this content of this view to suite the needs of your application.
  */
 Ext.define("MyDashboard.view.main.Main", {
-  extend: "Ext.tab.Panel",
+  extend: "Ext.container.Container",
   xtype: "app-main",
-
   requires: [
-    "Ext.plugin.Viewport",
     "Ext.window.MessageBox",
-
     "MyDashboard.view.main.MainController",
     "MyDashboard.view.main.MainModel",
-    "MyDashboard.view.main.List",
   ],
-
+  plugins: "viewport",
   controller: "main",
   viewModel: "main",
 
-  ui: "navigation",
-
-  tabBarHeaderPosition: 1,
-  titleRotation: 0,
-  tabRotation: 0,
-
-  header: {
-    layout: {
-      align: "stretchmax",
-    },
-    title: {
-      bind: {
-        text: "{name}",
-      },
-      flex: 0,
-    },
-    iconCls: "fa-th-list",
+  layout: {
+    type: "border",
   },
-
-  tabBar: {
-    flex: 1,
-    layout: {
-      align: "stretch",
-      overflowHandler: "none",
-    },
-  },
-
-  responsiveConfig: {
-    tall: {
-      headerPosition: "top",
-    },
-    wide: {
-      headerPosition: "left",
-    },
-  },
-
-  defaults: {
-    bodyPadding: 20,
-    tabConfig: {
-      responsiveConfig: {
-        wide: {
-          iconAlign: "left",
-          textAlign: "left",
-        },
-        tall: {
-          iconAlign: "top",
-          textAlign: "center",
-          width: 120,
-        },
-      },
-    },
-  },
-
   items: [
     {
-      title: "Home",
-      iconCls: "fa-home",
-      // The following grid shares a store with the classic version's grid as well!
-      items: [
-        {
-          xtype: "mainlist",
-        },
-      ],
-    },
-    {
-      title: "Requests",
-      iconCls: "fa-home",
-      // The following grid shares a store with the classic version's grid as well!
-      items: [
-        {
-          xtype: "toppanel",
-        },
-      ],
-    },
-    {
-      title: "Users",
-      iconCls: "fa-user",
+      xtype: "mainmenu",
       bind: {
-        html: "{loremIpsum}",
+        title: "{name}",
       },
-    },
-    {
-      title: "Logs",
-      iconCls: "fa-users",
-      items: [
-        {
-          xtype: "loggrid",
-        },
-      ],
-    },
-    {
-      title: "Login",
-      iconCls: "fa-users",
-      items: [
-        {
-          xtype: "loginview",
-        },
-      ],
-    },
-    {
-      title: " Products",
-      iconCls: "fa-users",
-      items: [
-        {
-          xtype: "productsgridview",
-        },
-      ],
-    },
 
-
-      // {
-      //   title:"Email",
-      //   iconCls: "fa-users",
-      //   items: [
-      //     {
-      //         xtype: 'messages-MessageGrid', // Keep it as is
-      //         region: 'center' // Keep it as is
-      //     }
-      // ]
-      // },
-  
-  
+      region: "west",
+      width: 250,
+      split: true,
+    },
     {
-      title: "Settings",
-      iconCls: "fa-cog",
-      bind: {
-        html: "{loremIpsum}",
-      },
+      region: "center",
+      xtype: "mainpanel",
+    },
+    {
+      region: "south",
+      xtype: "appfooter",
+    },
+    {
+      region: "north",
+      xtype: "appheader",
     },
   ],
 });

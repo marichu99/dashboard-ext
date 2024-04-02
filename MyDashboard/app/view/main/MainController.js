@@ -10,9 +10,9 @@ Ext.define("MyDashboard.view.main.MainController", {
   routes: {
     home: "onHomeRoute",
 
-    "toppanel|loggrid": {
+    "toppanel|loggrid|app-main": {
       action: "onRoute",
-      before: "onBeforeRoute",
+      // before: "onBeforeRoute",
     },
     "toppanel/:id": {
       action: "onTopPanelSelect",
@@ -46,6 +46,37 @@ Ext.define("MyDashboard.view.main.MainController", {
       action.stop();
     }
   },
+
+  onLogout: function () {
+    localStorage.removeItem("appLoggedIn");
+
+    this.getView().destroy();
+
+    Ext.widget("loginview");
+  },
+
+  onMainMenuItemClick: function (view, record, item, index, e, eOpts) {
+    let mainPanel = this.getMainPanel();
+    console.log(mainPanel);
+    console.log(record);
+
+    let activeTab = mainPanel.items.findBy(
+      (tabItem) => tabItem.title === record.get("text")
+    );
+
+    if (!activeTab && record.get("leaf")) {
+      // create tab using details from record
+      activeTab = mainPanel.add({
+        xtype: "panel",
+        title: record.get("text"),
+        iconCls: record.get("iconCls"),
+        xtype: record.get("className"),
+        closable: true,
+      });
+    }
+    mainPanel.setActiveTab(activeTab);
+  },
+
   onHomeRoute: function () {
     let mainPanel = this.getMainPanel();
     if (mainPanel) {
@@ -66,6 +97,9 @@ Ext.define("MyDashboard.view.main.MainController", {
   },
   getMainMenu: function () {
     return Ext.ComponentQuery.query("mainmenu")[0];
+  },
+  getMainPanel: function name(params) {
+    return Ext.ComponentQuery.query("mainpanel")[0];
   },
   onBeforeRoute: function (action) {
     var hash = Ext.util.History.getToken();

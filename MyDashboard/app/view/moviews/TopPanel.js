@@ -1,5 +1,5 @@
 Ext.define('MyDashboard.view.moviews.TopPanel',{
-    extend:'Ext.tab.Panel',
+    extend:'Ext.panel.Panel',
     xtype:'toppanel',
     
     items:[
