@@ -1,0 +1,47 @@
+Ext.define("MyDashboard.view.logs.UpdateLogWindowController", {
+  extend: "Ext.app.ViewController",
+  alias: "controller.updatelogcontroller",
+
+  onSaveUpdateLog: function () {
+    var form = this.getView().down("form");
+    var values = form.getValues();
+    var id = Ext.Object.getValues(values)[0];
+
+
+
+    var url = "http://localhost:3000/logs/"+id;
+    console.log("The values is ", values);
+    console.log(id)
+    if (form.isValid()) {      
+
+      Ext.Ajax.request({
+        url: url,
+        method: "PUT", // Using PUT method for updating
+        jsonData: values,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        jsonData: values,
+        success: function (response) {
+          var responseData = Ext.decode(response.responseText);
+          if (responseData.success) {
+            Ext.Msg.alert("Success", "Logs updated successfully!");
+          } else {
+            Ext.Msg.alert(
+              "Error",
+              responseData.msg || "Failed to update product."
+            );
+          }
+        },
+        failure: function (response) {
+          Ext.Msg.alert("Error", "Failed to update product.");
+        },
+      });
+      this.getView().close(); // Close the window after sending the request
+    }
+  },
+
+  onCancelUpdateProduct: function () {
+    this.getView().close();
+  },
+});
