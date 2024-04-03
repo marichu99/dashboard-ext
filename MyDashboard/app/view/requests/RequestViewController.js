@@ -12,17 +12,21 @@ Ext.define("MyDashboard.view.requests.RequestViewController", {
       return;
     }
 
-    
-    
-
     viewModel.getStore("requests").loadData(requests);
+  },
+  onAddRequestClicked: function (btn, e, eOpts) {
+    console.log(btn.getText() + " was clicked");
+    var wd = Ext.create({
+      xtype: "requestformwindow",
+    });
+    wd.show();
   },
   onShowLogs: function (btn, e, eOpts) {
     let requestGrid = this.getView();
     let lowerPanel = Ext.ComponentQuery.query("downpanel")[0];
     if (requestGrid.getHeight() === 600) {
-      requestGrid.setHeight(400);
-      lowerPanel.setHeight(400);
+      requestGrid.setHeight(350);
+      lowerPanel.setHeight(450);
       btn.setText("Hide Logs");
     } else {
       requestGrid.setHeight(600);
@@ -63,13 +67,13 @@ Ext.define("MyDashboard.view.requests.RequestViewController", {
   },
   onSelectTopPanel: function (id) {
     let me = this,
-        grid = me.getView(),
-        vm = me.getViewModel(),
-        refs = me.getReferences();
-    let record = grid.getStore().findRecord('_id', id)
-    vm.set("record", record)
-    grid.getSelectionModel().select(record)
-},
+      grid = me.getView(),
+      vm = me.getViewModel(),
+      refs = me.getReferences();
+    let record = grid.getStore().findRecord("_id", id);
+    vm.set("record", record);
+    grid.getSelectionModel().select(record);
+  },
   onLogGridCellClick: function (
     grid,
     td,

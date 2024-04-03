@@ -43,6 +43,14 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
           click: "onFilterClick",
         },
       },
+      {
+        text: "Add request",
+        xtype: "button",
+        iconCls: "fas fa-plus",
+        listeners: {
+          click: "onAddRequestClicked",
+        },
+      },
       "->",
       {
         text: "Show Logs",
@@ -54,6 +62,7 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
     ],
   },
   columns: [
+    { text: "Request Name", dataIndex: "name", flex: 1 },
     {
       text: "Date",
       dataIndex: "date",
@@ -66,6 +75,13 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
       text: "Resource URL",
       dataIndex: "resourceUrl",
       flex: 1,
+      renderer: function (value) {
+        return Ext.String.format(
+          '<a href="{0}" target="_blank">{1}</a>',
+          value, // URL
+          value // Display text (URL)
+        );
+      },
     },
   ],
   bbar: {
@@ -81,6 +97,6 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
     cellcontextmenu: "onLogGridCellContextMenu",
     selectLog: "onSelectLog",
     //cellcontextmenu:'onRequestGridCellContextMenu',
-    selecttoppanel:'onSelectTopPanel'
+    selecttoppanel: "onSelectTopPanel",
   },
 });

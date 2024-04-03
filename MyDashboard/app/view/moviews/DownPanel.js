@@ -3,6 +3,7 @@ Ext.define('MyDashboard.view.moviews.DownPanel',{
     xtype:'downpanel',
     reference:"downpanel",
     height:0,
+    scrollable: true,
     items: [{
         title: 'Logs',
         items: [
