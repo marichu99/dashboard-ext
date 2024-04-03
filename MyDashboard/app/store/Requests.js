@@ -1,16 +1,19 @@
 Ext.define('MyDashboard.store.Requests', {
     extend: 'Ext.data.Store',
     alias: "store.requests",
+    storeId:"requests",
     model: 'MyDashboard.model.Request',    
     requires: ['MyDashboard.model.Request'],
     autoLoad: true,
-    pageSize: 10,
+    sorters: ["id"],
+    pageSize: 40 ,
     proxy: {
-        type: 'rest',
+        type: 'ajax',
         url: 'http://localhost:3000/requests',
         reader: {
             type: 'json',
             rootProperty: 'rows'
-        }
+        },
+        
     }
 });
