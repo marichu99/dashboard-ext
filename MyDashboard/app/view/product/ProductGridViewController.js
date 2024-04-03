@@ -51,7 +51,7 @@ onUpdateProduct: function () {
   }
 },
 
-onSaveUpdateProduct: function () {
+/* onSaveUpdateProduct: function () {
   var window = this.getView();
   var form = window.down('form');
   var values = form.getValues();
@@ -67,7 +67,10 @@ onSaveUpdateProduct: function () {
       var responseData = Ext.decode(response.responseText);
       if (responseData.success) {
         Ext.Msg.alert('Success', 'Product updated successfully!');
+
         // Optionally, you can reload the product grid to reflect the changes
+         // Reload the product store to reflect the changes
+         Ext.getStore('products').reload();
         window.close(); // Close the update window after successful update
       } else {
         Ext.Msg.alert('Error', responseData.msg || 'Failed to update product.');
@@ -77,8 +80,7 @@ onSaveUpdateProduct: function () {
       Ext.Msg.alert('Error', 'Failed to update product.');
     }
   });
-},
-
+}, */
 
 onDeleteProduct: function () {
   var grid = this.getView();
@@ -87,12 +89,30 @@ onDeleteProduct: function () {
   if (selectedRecord) {
     Ext.Msg.confirm('Delete', 'Are you sure you want to delete this product?', function (btn) {
       if (btn === 'yes') {
-         //delete operation 
-         selectedRecord.erase();
+        // Send a request to delete the product from the backend
+        Ext.Ajax.request({
+          url: 'http://localhost:6060/api/products/' + selectedRecord.get('id'), // Update the URL with the appropriate endpoint for deleting a product
+          method: 'DELETE', // Use DELETE method for deletion
+          success: function (response) {
+            var responseData = Ext.decode(response.responseText);
+            if (responseData.success) {
+              Ext.Msg.alert('Success', 'Product deleted successfully!');
+              
+              // Optionally, you can reload the product grid to reflect the changes
+              grid.getStore().remove(selectedRecord); // Remove the record from the frontend grid
+            } else {
+              Ext.Msg.alert('Error', responseData.msg || 'Failed to delete product.');
+            }
+          },
+          failure: function (response) {
+            Ext.Msg.alert('Error', 'Failed to delete product.');
+          }
+        });
       }
     });
   }
 },
+
 
   /* onProductGridCellClick: function (
     grid,

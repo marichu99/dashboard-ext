@@ -3,9 +3,28 @@ Ext.define('MyDashboard.view.product.UpdateProductController', {
     alias: 'controller.updateproductcontroller',
   
     onSaveUpdateProduct: function () {
-        var form = this.getView().down('form');
-        if (form.isValid()) {
-          var values = form.getValues();
+
+         var form = this.lookupReference('updateform'); // Get reference to the form
+
+
+    var values = form.getForm().getValues(); // Get form field values
+
+    // Log the selectedProduct data before form submission
+    console.log('Selected Product Data:', this.getViewModel().get('selectedProduct'));
+
+
+    // Construct the updated product request object
+    var updatedProductRequest = {
+        id: values.id, // Product ID
+        name: values.name,
+        price: values.price,
+        category: values.category,
+        imageUrl: values.imageUrl,
+        quantity: values.quantity
+    };
+
+     // Set the productId explicitly from selectedProduct.id
+      values.id = this.getView().getViewModel().get('selectedProduct.id');
           Ext.Ajax.request({
             url: 'http://localhost:6060/api/products/' + values.id, // Update the URL with the appropriate endpoint for updating a product
             method: 'PUT', // Using PUT method for updating
@@ -28,10 +47,7 @@ Ext.define('MyDashboard.view.product.UpdateProductController', {
           });
           this.getView().close(); // Close the window after sending the request
         }
-      },
-      
-    onCancelUpdateProduct: function () {
-      this.getView().close();
-    }
+     
+
   });
   

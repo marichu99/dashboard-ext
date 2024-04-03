@@ -24,6 +24,11 @@ Ext.define('MyDashboard.view.product.UpdateProduct', {
     reference: 'updateform',
     layout: 'form',
     items: [{
+        xtype: 'textfield',
+        fieldLabel: 'Product  ID',
+        bind: '{selectedProduct.id}', // Bind to the selectedLproduct data
+        readOnly: true, // Make the field non-editable
+      },{
       xtype: 'textfield',
       fieldLabel: 'Product Name',
       bind: '{selectedProduct.name}' // Bind to the selectedProduct data
