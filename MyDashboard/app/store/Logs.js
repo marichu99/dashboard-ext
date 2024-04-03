@@ -5,7 +5,7 @@ Ext.define('MyDashboard.store.Logs', {
     requires: ['MyDashboard.model.Log'],
     autoLoad: true,
     groupField: "type",
-    pageSize: 10,
+    pageSize: 40,
     proxy: {
         type: 'rest',
         url: 'http://localhost:3000/logs',
