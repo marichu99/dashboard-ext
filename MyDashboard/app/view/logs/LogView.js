@@ -26,6 +26,10 @@ Ext.define('MsTraining.view.logs.LogView', {
             handler:'onAddLog'
         },
         {
+            text:'Delete Log',
+            handler:'onDeleteLog'
+        },
+        {
             text: 'View Log',
             handler: 'onViewLog',
             bind:{
