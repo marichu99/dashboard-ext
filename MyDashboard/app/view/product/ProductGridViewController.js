@@ -26,7 +26,75 @@ Ext.define("MyDashboard.view.requests.ProductGridViewController", {
     }
   },
 
-  onProductGridCellClick: function (
+  onAddProduct: function() {
+    Ext.create('MyDashboard.view.product.AddProduct').show();
+  },
+  
+  onAddProductCancel: function(button) {
+    var window = button.up('window'); // Get reference to the window
+    if (window) {
+        window.close(); // Close the window
+    }
+},
+onUpdateProduct: function () {
+  var grid = this.getView();
+  var selectedRecord = grid.getSelection()[0];
+
+  if (selectedRecord) {
+    Ext.create('MyDashboard.view.product.UpdateProduct', {
+      viewModel: {
+        data: {
+          selectedProduct: selectedRecord.getData() // Pass the selected product data to the window
+        }
+      }
+    }).show();
+  }
+},
+
+onSaveUpdateProduct: function () {
+  var window = this.getView();
+  var form = window.down('form');
+  var values = form.getValues();
+
+  Ext.Ajax.request({
+    url: 'http://localhost:6060/api/products/' + values.id, // Update the URL with the appropriate endpoint for updating a product
+    method: 'PUT', //  using PUT method for updating
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    jsonData: values,
+    success: function (response) {
+      var responseData = Ext.decode(response.responseText);
+      if (responseData.success) {
+        Ext.Msg.alert('Success', 'Product updated successfully!');
+        // Optionally, you can reload the product grid to reflect the changes
+        window.close(); // Close the update window after successful update
+      } else {
+        Ext.Msg.alert('Error', responseData.msg || 'Failed to update product.');
+      }
+    },
+    failure: function (response) {
+      Ext.Msg.alert('Error', 'Failed to update product.');
+    }
+  });
+},
+
+
+onDeleteProduct: function () {
+  var grid = this.getView();
+  var selectedRecord = grid.getSelection()[0];
+
+  if (selectedRecord) {
+    Ext.Msg.confirm('Delete', 'Are you sure you want to delete this product?', function (btn) {
+      if (btn === 'yes') {
+         //delete operation 
+         selectedRecord.erase();
+      }
+    });
+  }
+},
+
+  /* onProductGridCellClick: function (
     grid,
     td,
     cellIndex,
@@ -36,12 +104,12 @@ Ext.define("MyDashboard.view.requests.ProductGridViewController", {
     e,
     eOpts
   ) {
-    // let logStore = Ext.ComponentQuery.query("loggrid")[0].getStore();
-    // logStore.reload({
-    //   params: {
-    //     id: record.get("_id"),
-    //   },
-    // });
-    // console.log(record.get("_id"));
-  },
+    let logStore = Ext.ComponentQuery.query("loggrid")[0].getStore();
+    logStore.reload({
+      params: {
+        id: record.get("_id"),
+      },
+    });
+    console.log(record.get("_id"));
+  }, */
 });

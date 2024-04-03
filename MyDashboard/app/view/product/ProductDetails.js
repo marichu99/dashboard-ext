@@ -55,6 +55,12 @@ Ext.define('MyDashboard.view.product.ProductDetails', {
     buttons: [{
       text: 'Place Order',
       handler: 'onPlaceOrder'
+    }, {
+      text: 'Save',
+      handler: 'onAddProductSubmit'
+    }, {
+      text: 'Cancel',
+      handler: 'onAddProductCancel'
     }]
   });
   

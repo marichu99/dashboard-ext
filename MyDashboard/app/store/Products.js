@@ -7,7 +7,8 @@ Ext.define('MyDashboard.store.Products', {
     autoLoad: true,
     sorters: ["id"],
     proxy: {
-        type: 'rest',
+        type: 'rest', 
+      /*   type: 'ajax', */
         url: 'http://localhost:6060/api/products',
         reader: {
             type: 'json',

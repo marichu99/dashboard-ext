@@ -7,9 +7,6 @@ Ext.define("MyDashboard.view.product.ProductGrid", {
   store: {
     type: "products",
   },
-  //   viewModel: {
-  //     type: "productviewmodel",
-  //   },
   height: 600,
   plugins: {
     cellediting: {
@@ -31,6 +28,24 @@ Ext.define("MyDashboard.view.product.ProductGrid", {
           disabled: "{!productsgridview.selection}",
         },
       },
+      {
+        text: "Add Product",
+        handler: "onAddProduct",
+      }, {
+        text: "Update Product",
+        handler: "onUpdateProduct",
+        bind: {
+          disabled: "{!productsgridview.selection}",
+        },
+      },
+      {
+        text: "Delete Product",
+        handler: "onDeleteProduct",
+        bind: {
+          disabled: "{!productsgridview.selection}",
+        },
+      },
+     
     ],
   },
   columns: [
@@ -59,8 +74,7 @@ Ext.define("MyDashboard.view.product.ProductGrid", {
   viewConfig: {
     scrollable: true,
   },
-  listeners: {
+ /*  listeners: {
     cellclick: "onProductGridCellClick",
-  },
-  
+  }, */
 });

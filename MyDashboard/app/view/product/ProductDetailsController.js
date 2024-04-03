@@ -52,4 +52,32 @@ Ext.define("MyDashboard.view.product.ProductDetailsController", {
       },
     });
   },
+
+
+  onAddProductSubmit: function(button) {
+    var form = button.up('window').down('form');
+    var values = form.getValues();
+
+    Ext.Ajax.request({
+        url: 'http://localhost:6060/api/products', // Replace with your actual backend URL
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        jsonData: values,
+        success: function(response) {
+            var responseData = Ext.decode(response.responseText);
+            if (responseData.success) {
+                Ext.Msg.alert('Success', 'Product added successfully!');
+                // Update your product list in the frontend if needed
+            } else {
+                Ext.Msg.alert('Error', responseData.msg || 'Failed to add product.');
+            }
+        },
+        failure: function(response) {
+            Ext.Msg.alert('Error', 'Failed to add product.');
+        }
+    });
+}
+
 });
