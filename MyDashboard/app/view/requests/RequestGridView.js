@@ -52,6 +52,13 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
         },
       },
       {
+        text: "Update Request",
+        handler: "onUpdateRequest",
+        bind: {
+          disabled: "{!requestgridview.selection}",
+        },
+      },
+      {
         text: "Delete Request",
         handler: "onDeleteProduct",
         bind: {
@@ -69,6 +76,7 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
     ],
   },
   columns: [
+    { text: "Request ID", dataIndex: "_id", flex: 1 },
     { text: "Request Name", dataIndex: "name", flex: 1 },
     {
       text: "Date",
