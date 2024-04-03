@@ -20,17 +20,16 @@ Ext.define("MyDashboard.view.product.ProductDetailsController", {
     console.log("Product Quantity:", productQuantity);
     console.log("Product Image URL:", productImageUrl);
 
-    var selectedProducts = [
-      productId,
-      productQuantity,
-    ];
+    var selectedProducts = [productId, productQuantity];
     var orderItems = [];
-    Ext.Array.each(selectedProducts, function (product, index) {
+    let i;
+    for (i = 0; i < selectedProducts.length / 2; i++) {
       orderItems.push({
         productCode: productId, // Assuming 'id' is the product code
         quantity: productQuantity,
       });
-    });
+    }
+    
 
     var orderData = {
       orderItems: orderItems,
@@ -38,25 +37,19 @@ Ext.define("MyDashboard.view.product.ProductDetailsController", {
 
     // Convert orderData to JSON string
     var jsonData = Ext.JSON.encode(orderData);
-    console.log("The JSON DATA is",jsonData); // Output JSON data
-
-
+    console.log("The JSON DATA is", jsonData); // Output JSON data
 
     // Example: Sending data to server for order processing
-    // Ext.Ajax.request({
-    //   url: "url_to_submit_order",
-    //   method: "POST",
-    //   jsonData: {
-    //     productName: productName,
-    //     productCategory: productCategory,
-    //     productQuantity: productQuantity,
-    //   },
-    //   success: function (response) {
-    //     // Handle success response
-    //   },
-    //   failure: function (response) {
-    //     // Handle failure response
-    //   },
-    // });
+    Ext.Ajax.request({
+      url: "url_to_submit_order",
+      method: "POST",
+      jsonData,
+      success: function (response) {
+        // Handle success response
+      },
+      failure: function (response) {
+        // Handle failure response
+      },
+    });
   },
 });

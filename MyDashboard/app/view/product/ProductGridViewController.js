@@ -36,12 +36,12 @@ Ext.define("MyDashboard.view.requests.ProductGridViewController", {
     e,
     eOpts
   ) {
-    let logStore = Ext.ComponentQuery.query("loggrid")[0].getStore();
-    logStore.reload({
-      params: {
-        id: record.get("_id"),
-      },
-    });
-    console.log(record.get("_id"));
+    // let logStore = Ext.ComponentQuery.query("loggrid")[0].getStore();
+    // logStore.reload({
+    //   params: {
+    //     id: record.get("_id"),
+    //   },
+    // });
+    // console.log(record.get("_id"));
   },
 });

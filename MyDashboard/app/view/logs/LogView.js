@@ -3,6 +3,7 @@ Ext.define('MsTraining.view.logs.LogView', {
     xtype: 'loggrid',
     reference: 'loggrid',
     // controller: 'loggridcontroller',
+    scrollable: true,
     store: {
         type: 'logs'
     },
