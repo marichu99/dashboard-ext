@@ -34,6 +34,20 @@ Ext.define("MyDashboard.view.requests.RequestViewController", {
       btn.setText("Show Logs");
     }
   },
+  onUpdateRequest: function () {
+    var grid = this.getView();
+    var selectedRecord = grid.getSelection()[0];
+  
+    if (selectedRecord) {
+      Ext.create('MyDashboard.view.requests.UpdateRequestWindow', {
+        viewModel: {
+          data: {
+            selectedRequest: selectedRecord.getData() // Pass the selected product data to the window
+          }
+        }
+      }).show();
+    }
+  },
   onDeleteProduct: function () {
     var grid = this.getView();
     var selectedRecord = grid.getSelection()[0];
