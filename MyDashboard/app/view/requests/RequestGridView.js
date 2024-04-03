@@ -13,7 +13,7 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
   height: 600,
   plugins: {
     rowediting: {
-      clicksToEdit: 1,
+      clicksToEdit: 3,
     },
   },
   selModel: {
@@ -49,6 +49,13 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
         iconCls: "fas fa-plus",
         listeners: {
           click: "onAddRequestClicked",
+        },
+      },
+      {
+        text: "Delete Request",
+        handler: "onDeleteProduct",
+        bind: {
+          disabled: "{!requestgridview.selection}",
         },
       },
       "->",
@@ -92,7 +99,7 @@ Ext.define("MyDashboard.view.requests.RequestGridView", {
     scrollable: true,
   },
   listeners: {
-    cellclick: "onLogGridCellClick",
+    // cellclick: "onLogGridCellClick",
     celldblclick: "onLogGridCellDblClick",
     cellcontextmenu: "onLogGridCellContextMenu",
     selectLog: "onSelectLog",
