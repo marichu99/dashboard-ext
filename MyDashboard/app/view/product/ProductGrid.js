@@ -49,6 +49,7 @@ Ext.define("MyDashboard.view.product.ProductGrid", {
     ],
   },
   columns: [
+    { text:"product Id",dataIndex: "_id", text: "ID" },
     {
       text: "Product Name",
       dataIndex: "name",
