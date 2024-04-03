@@ -1,4 +1,4 @@
-Ext.define("MyDashboard.view.logs.RequestViewController", {
+Ext.define("MyDashboard.view.logs.LogViewController", {
   extend: "Ext.app.ViewController",
   alias: "controller.loggridcontroller",
   stores: ["logs"],
@@ -10,10 +10,28 @@ Ext.define("MyDashboard.view.logs.RequestViewController", {
     });
     wd.show();
   },
+  onUpdateLog: function () {
+    var grid = this.getView();
+    var selectedRecord = grid.getSelection()[0];
+  
+    if (selectedRecord) {
+      Ext.create('MyDashboard.view.logs.UpdateLogWindow', {
+        viewModel: {
+          data: {
+            selectedLog: selectedRecord.getData() // Pass the selected product data to the window
+          }
+        }
+      }).show();
+    }
+  },
 
   onDeleteLog: function () {
     var grid = this.getView();
     var selectedRecord = grid.getSelection()[0];
+
+    var me = this,
+      form = me.getView().down("form"),
+      values = form.getValues();
 
     if (selectedRecord) {
       console.log(selectedRecord.data._id);
