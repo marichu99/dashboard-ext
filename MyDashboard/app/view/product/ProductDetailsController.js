@@ -29,55 +29,59 @@ Ext.define("MyDashboard.view.product.ProductDetailsController", {
         quantity: productQuantity,
       });
     }
-    
 
     var orderData = {
       orderItems: orderItems,
     };
 
     // Convert orderData to JSON string
-    var jsonData = Ext.JSON.encode(orderData);
+    // var jsonData = Ext.JSON.encode(orderData);
+    var jsonData=orderData
     console.log("The JSON DATA is", jsonData); // Output JSON data
 
     // Example: Sending data to server for order processing
     Ext.Ajax.request({
-      url: "url_to_submit_order",
+      url: "http://localhost:6001/api/orders/placeOrder",
       method: "POST",
       jsonData,
       success: function (response) {
-        // Handle success response
+        var responseData = Ext.decode(response.responseText);
+        if (responseData.success) {
+          Ext.Msg.alert("Success", "Product added successfully!");
+          // Update your product list in the frontend if needed
+        } else {
+          Ext.Msg.alert("Error", responseData.msg || "Failed to add product.");
+        }
       },
       failure: function (response) {
-        // Handle failure response
+        Ext.Msg.alert("Error", "Failed to add product.");
       },
     });
   },
 
-
-  onAddProductSubmit: function(button) {
-    var form = button.up('window').down('form');
+  onAddProductSubmit: function (button) {
+    var form = button.up("window").down("form");
     var values = form.getValues();
 
     Ext.Ajax.request({
-        url: 'http://localhost:6060/api/products', // Replace with your actual backend URL
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        jsonData: values,
-        success: function(response) {
-            var responseData = Ext.decode(response.responseText);
-            if (responseData.success) {
-                Ext.Msg.alert('Success', 'Product added successfully!');
-                // Update your product list in the frontend if needed
-            } else {
-                Ext.Msg.alert('Error', responseData.msg || 'Failed to add product.');
-            }
-        },
-        failure: function(response) {
-            Ext.Msg.alert('Error', 'Failed to add product.');
+      url: "http://localhost:6060/api/products", 
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      jsonData: values,
+      success: function (response) {
+        var responseData = Ext.decode(response.responseText);
+        if (responseData.success) {
+          Ext.Msg.alert("Success", "Product added successfully!");
+          // Update your product list in the frontend if needed
+        } else {
+          Ext.Msg.alert("Error", responseData.msg || "Failed to add product.");
         }
+      },
+      failure: function (response) {
+        Ext.Msg.alert("Error", "Failed to add product.");
+      },
     });
-}
-
+  },
 });
